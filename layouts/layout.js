@@ -9,9 +9,8 @@ import { useRouter } from 'next/router'
 import Comments from '@/components/Comments'
 
 const mapPageUrl = id => {
-  return 'https://www.notion.so/' + id.replace(/-/g, '')
+  return BLOG.notionDomain + id.replace(/-/g, '')
 }
-
 const Layout = ({
   children,
   blockMap,
@@ -42,8 +41,8 @@ const Layout = ({
                   alt={BLOG.author}
                   width={24}
                   height={24}
-                  src={`https://gravatar.com/avatar/${emailHash}`}
-                  className="rounded-full"
+                  src={BLOG.bloglogo}
+                  // className="rounded-full"
                 />
                 <p className="ml-2 md:block">{BLOG.author}</p>
               </a>
@@ -80,7 +79,7 @@ const Layout = ({
           </div>
         )}
       </article>
-      <div className="flex justify-between font-medium text-gray-500 dark:text-gray-400">
+      <div className="flex justify-between font-medium text-gray-500 dark:text-gray-400 margin-div">
         <a>
           <button
             onClick={() => router.push(BLOG.path || '/')}

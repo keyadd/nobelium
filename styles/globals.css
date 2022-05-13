@@ -99,6 +99,9 @@ nav {
   flex-wrap: wrap;
   line-height: 1.5em;
 }
+.margin-div{
+  margin-bottom: 40px
+}
 
 .article-tags::-webkit-scrollbar {
   width: 0 !important;

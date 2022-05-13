@@ -27,7 +27,7 @@ const Comments = ({ frontMatter }) => {
   const router = useRouter()
   return (
     <div>
-      {BLOG.comment && BLOG.comment.provider === 'gitalk' && (
+      {BLOG.comment && BLOG.comment.provider === 'gitalk' && router.asPath !== '/about' && router.asPath !== '/error' && (
         <GitalkComponent
           options={{
             id: frontMatter.id,
@@ -41,10 +41,10 @@ const Comments = ({ frontMatter }) => {
           }}
         />
       )}
-      {BLOG.comment && BLOG.comment.provider === 'utterances' && (
+      {BLOG.comment && BLOG.comment.provider === 'utterances' && router.asPath !== '/about' && router.asPath !== '/error' && (
         <UtterancesComponent issueTerm={frontMatter.id} />
       )}
-      {BLOG.comment && BLOG.comment.provider === 'cusdis' && (
+      {BLOG.comment && BLOG.comment.provider === 'cusdis' && router.asPath !== '/about' && router.asPath !== '/error' && (
         <CusdisComponent
         lang={fetchCusdisLang()}
           attrs={{

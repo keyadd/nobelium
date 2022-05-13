@@ -26,16 +26,32 @@ export async function getStaticPaths () {
 export async function getStaticProps ({ params: { slug } }) {
   const posts = await getAllPosts({ includePages: true })
   const post = posts.find(t => t.slug === slug)
-  const blockMap = await getPostBlocks(post.id)
-  const emailHash = createHash('md5')
-    .update(BLOG.email)
-    .digest('hex')
-    .trim()
-    .toLowerCase()
+  if (String(post) === 'undefined') {
+    const post = posts.find(t => t.slug === 'error')
+    // const id = '39ecfe1786c0476a8b1f8994c8c79a09'
+    const blockMap = await getPostBlocks(post.id)
+    const emailHash = createHash('md5')
+      .update(BLOG.email)
+      .digest('hex')
+      .trim()
+      .toLowerCase()
 
-  return {
-    props: { post, blockMap, emailHash },
-    revalidate: 1
+    return {
+      props: { post, blockMap, emailHash },
+      revalidate: 1
+    }
+  } else {
+    const blockMap = await getPostBlocks(post.id)
+    const emailHash = createHash('md5')
+      .update(BLOG.email)
+      .digest('hex')
+      .trim()
+      .toLowerCase()
+
+    return {
+      props: { post, blockMap, emailHash },
+      revalidate: 1
+    }
   }
 }
 
